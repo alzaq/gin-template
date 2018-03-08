@@ -141,7 +141,7 @@ func (e *TemplateEngine) executeTemplate(out io.Writer, name string, data interf
 	}
 
 	if !ok || e.config.DisableCache {
-		tplList := []string{name}
+		tplList := []string{}
 		if useMaster {
 			//render()
 			if e.config.Master != "" {
@@ -152,6 +152,7 @@ func (e *TemplateEngine) executeTemplate(out io.Writer, name string, data interf
 			//renderFile()
 			tplList = append(tplList, e.config.Partials...)
 		}
+		tplList = append(tplList, name)
 
 		// Loop through each template and test the full path
 		tpl = template.New(name)
